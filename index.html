@@ -1,107 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanya Moiseev - Art From The Heart</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Georgia, serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f8f6f2;
-            color: #333;
-        }
+<title>Tanya Moiseev - Art From The Heart</title>
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-
-        header p {
-            margin-top: 10px;
-            font-style: italic;
-            font-size: 1.2em;
-        }
-
-        main {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        h2 {
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 10px;
-        }
-
-        .featured-work {
-    text-align: center;
-    margin-top: 30px;
+<style>
+body {
+    margin: 0;
+    font-family: Georgia, serif;
+    background: #f8f6f2;
+    color: #333;
 }
 
-.featured-work img {
-    display: block;
-    max-width: 100%;
-    width: 800px;
-    height: auto;
-    margin: 0 auto 15px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+header {
+    background: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 1.1em;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.intro {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap: 30px;
+}
+
+.art-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,.15);
+    transition: transform .2s;
+}
+
+.art-card:hover {
+    transform: translateY(-5px);
+}
+
+.art-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.art-info {
+    padding: 15px;
+    text-align: center;
 }
 
 .art-title {
-    display: block;
-    font-size: 1.3em;
+    font-size: 1.2em;
     font-weight: bold;
-    margin-top: 10px;
 }
 
-.art-medium {
-    display: block;
-    text-align: center;
-    width: 100%;
-    font-style: italic;
+.medium {
     color: #666;
-    margin-top: 5px;
+    font-style: italic;
+    margin: 8px 0;
+}
 
-        }
+.price {
+    color: #2c3e50;
+    font-weight: bold;
+}
 
-        footer {
-            text-align: center;
-            padding: 30px;
-            margin-top: 50px;
-            background-color: #2c3e50;
-            color: white;
-        }
-    </style>
+.sold {
+    color: #aa0000;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    margin-top: 50px;
+    background: #2c3e50;
+    color: white;
+}
+</style>
 </head>
+
 <body>
 
 <header>
     <h1>Tanya Moiseev - Art From The Heart</h1>
     <p>Original artwork inspired by beauty, imagination, and emotion.</p>
+
+    <nav>
+        <a href="index.html">Home</a>
+        about.htmlAbout the Artist</a>
+    </nav>
 </header>
 
 <main>
 
-   <h2>Featured Works</h2>
-
-<div class="featured-work">
-    <img src="images/ghostship.jpg" alt
-
-    
-        <div class="art-title">Ghost Ship</div>
-        <div class="art-medium">Medium - Oil on Canvas</div>
+<div class="intro">
+    <h2>Featured Collection</h2>
+    <p>
+        Welcome to my gallery. Click any artwork to view a larger image and details.
+    </p>
 </div>
+
+<div class="gallery">
+
+    <div class="art-card">
+        images/ghostship-large.jpg
+            images/ghostship.jpg
+        </a>
+
+        <div class="art-info">
+            <div class="art-title">Ghost Ship</div>
+            <div class="medium">Oil on Canvas</div>
+            <div class="price">$750</div>
+        </div>
+    </div>
+
+    <div class="art-card">
+        images/artwork2-large.jpg
+            images/artwork2.jpg
+        </a>
+
+        <div class="art-info">
+            <div class="art-title">Morning Reflections</div>
+            <div class="medium">Acrylic on Canvas</div>
+            <div class="price">$625</div>
+        </div>
+    </div>
+
+    <div class="art-card">
+        images/artwork3-large.jpg
+            images/artwork3.jpg
+        </a>
+
+        <div class="art-info">
+            <div class="art-title">Autumn Dreams</div>
+            <div class="medium">Oil on Canvas</div>
+            <div class="sold">SOLD</div>
+        </div>
+    </div>
+
+</div>
+
 </main>
 
 <footer>
