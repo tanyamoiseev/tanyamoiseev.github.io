@@ -15,10 +15,12 @@ body {
 }
 
 header {
-    background: #2c3e50;
+    background: linear-gradient(
+        135deg,
+        #5a4331,
+        #8a6a44
+    );
     color: white;
-    text-align: center;
-    padding: 40px 20px;
 }
 
 nav {
@@ -55,14 +57,14 @@ main {
 
 .art-card {
     background: white;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 3px 10px rgba(0,0,0,.15);
-    transition: transform .2s;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transition: transform 0.2s ease;
 }
 
 .art-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-6px);
 }
 
 .art-card img {
