@@ -1,174 +1,538 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Art From The Heart by Tanya Moiseev — a gallery celebrating color, feeling, creativity, and the joy of painting." />
+  <title>Art From The Heart — Tanya Moiseev</title>
+  <style>
+    :root {
+      --ink: #2d2531;
+      --muted: #756a79;
+      --cream: #fffaf4;
+      --paper: #fffefe;
+      --rose: #c96c7d;
+      --plum: #76506f;
+      --gold: #d5a64a;
+      --sage: #7e9b86;
+      --shadow: 0 18px 45px rgba(65, 41, 59, .13);
+      --radius: 24px;
+    }
 
-<title>Tanya Moiseev - Art From The Heart</title>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(201,108,125,.12), transparent 36%),
+        radial-gradient(circle at 85% 18%, rgba(213,166,74,.12), transparent 30%),
+        linear-gradient(180deg, #fffdfa 0%, #fff8f4 48%, #f8f2f6 100%);
+      min-height: 100vh;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Georgia, serif;
-    background: ##f8f6f2;
-    color: #333;
-}
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
 
-header {
-    background-color: #2c3e50;
-    color: white;
-    text-align: center;
-    padding: 40px 20px;
-}
+    .shell { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
 
-nav {
-    margin-top: 15px;
-}
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(16px);
+      background: rgba(255,250,244,.86);
+      border-bottom: 1px solid rgba(118,80,111,.1);
+    }
 
-nav a {
-    color: white;
-    text-decoration: none;
-    margin: 0 15px;
-    font-size: 1.1em;
-}
+    .nav {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-nav a:hover {
-    text-decoration: underline;
-}
+    .brand {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: .02em;
+    }
 
-main {
-    max-width: 1200px;
-    margin: auto;
-    padding: 20px;
-}
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50% 42% 48% 45%;
+      background: linear-gradient(135deg, var(--rose), var(--gold));
+      box-shadow: inset 8px -8px 18px rgba(255,255,255,.24), 0 8px 18px rgba(118,80,111,.18);
+      transform: rotate(-8deg);
+    }
 
-.intro {
-    text-align: center;
-    margin-bottom: 40px;
-}
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 18px;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+    }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
-    gap: 30px;
-}
+    nav a {
+      text-decoration: none;
+      font-weight: 700;
+      color: var(--plum);
+      padding: 10px 12px;
+      border-radius: 999px;
+    }
 
-.art-card {
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
+    nav a:hover, nav a:focus-visible { background: rgba(118,80,111,.08); outline: none; }
 
-.art-card img {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
-}
+    .hero {
+      padding: 86px 0 54px;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 54px;
+      align-items: center;
+    }
 
-.art-info {
-    padding: 15px;
-    text-align: center;
-}
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      color: var(--rose);
+      font-weight: 800;
+      font-size: .79rem;
+      margin-bottom: 16px;
+    }
 
-.art-title {
-    font-size: 1.2em;
-    font-weight: bold;
-}
+    h1 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.5rem, 8vw, 7.5rem);
+      line-height: .87;
+      letter-spacing: -.055em;
+      max-width: 760px;
+    }
 
-.medium {
-    color: #666;
-    font-style: italic;
-    margin: 8px 0;
-}
+    h1 span {
+      display: block;
+      color: var(--rose);
+      font-style: italic;
+      font-weight: 500;
+    }
 
-.price {
-    color: #2c3e50;
-    font-weight: bold;
-}
+    .hero p {
+      margin: 28px 0 0;
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
 
-.sold {
-    color: #aa0000;
-    font-weight: bold;
-}
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(118,80,111,.15);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 8px 22px rgba(65,41,59,.08);
+    }
+    .button.primary { background: var(--plum); color: white; border-color: var(--plum); }
 
-footer {
-    text-align: center;
-    padding: 25px;
-    margin-top: 50px;
-    background: #2c3e50;
-    color: white;
-}
-</style>
+    .hero-art {
+      min-height: 485px;
+      position: relative;
+    }
+
+    .frame {
+      position: absolute;
+      border-radius: 24px;
+      padding: 12px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .frame img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+    .frame.one { width: 62%; height: 72%; left: 4%; top: 10%; transform: rotate(-5deg); }
+    .frame.two { width: 50%; height: 58%; right: 0; top: 0; transform: rotate(6deg); }
+    .frame.three { width: 49%; height: 47%; right: 6%; bottom: 0; transform: rotate(-2deg); }
+
+    section { padding: 62px 0; }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2, .about-copy h2 {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.3rem, 4vw, 4rem);
+      line-height: 1;
+      letter-spacing: -.035em;
+    }
+
+    .section-heading p { margin: 0; color: var(--muted); max-width: 550px; line-height: 1.65; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .art-card {
+      appearance: none;
+      border: 0;
+      padding: 0;
+      border-radius: 22px;
+      overflow: hidden;
+      cursor: zoom-in;
+      background: #fff;
+      box-shadow: 0 13px 30px rgba(70,47,63,.10);
+      position: relative;
+      text-align: left;
+    }
+
+    .art-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      transition: transform .4s ease;
+    }
+
+    .art-card:hover img, .art-card:focus-visible img { transform: scale(1.035); }
+    .art-card:focus-visible { outline: 3px solid rgba(201,108,125,.45); outline-offset: 3px; }
+
+    .art-meta {
+      padding: 16px 17px 18px;
+      display: block;
+    }
+
+    .art-title { display: block; font-weight: 800; font-size: 1.02rem; margin-bottom: 7px; }
+    .art-details { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .art-medium { color: var(--muted); font-size: .88rem; font-style: italic; }
+    .art-price { color: var(--plum); font-size: .98rem; font-weight: 850; white-space: nowrap; }
+
+    .about {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 48px;
+      background: rgba(255,255,255,.58);
+      border: 1px solid rgba(118,80,111,.1);
+      border-radius: 34px;
+      padding: 42px;
+      box-shadow: var(--shadow);
+    }
+
+    .about-visual {
+      min-height: 390px;
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 32% 27%, rgba(255,255,255,.54), transparent 16%),
+        linear-gradient(145deg, rgba(201,108,125,.92), rgba(213,166,74,.82) 44%, rgba(126,155,134,.88));
+      position: relative;
+      overflow: hidden;
+    }
+    .about-visual::before, .about-visual::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,.22);
+      filter: blur(1px);
+    }
+    .about-visual::before { width: 240px; height: 240px; left: -55px; bottom: -65px; }
+    .about-visual::after { width: 180px; height: 180px; right: -25px; top: 38px; }
+    .brush-script {
+      position: absolute;
+      inset: auto 26px 24px 26px;
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 5vw, 4.6rem);
+      font-style: italic;
+      line-height: .95;
+      text-shadow: 0 8px 20px rgba(65,41,59,.18);
+    }
+
+    .about-copy { align-self: center; }
+    .about-copy p { color: var(--muted); line-height: 1.8; font-size: 1.03rem; }
+    .signature { margin-top: 24px; font-family: Georgia, "Times New Roman", serif; font-size: 1.45rem; font-style: italic; color: var(--rose); }
+
+    footer {
+      padding: 38px 0 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    dialog {
+      width: min(96vw, 1060px);
+      border: 0;
+      padding: 0;
+      border-radius: 28px;
+      box-shadow: 0 35px 90px rgba(46,31,43,.35);
+      background: #131015;
+      color: white;
+      overflow: hidden;
+    }
+    dialog::backdrop { background: rgba(33,24,31,.76); backdrop-filter: blur(8px); }
+
+    .lightbox-wrap { position: relative; }
+    .lightbox-img { width: 100%; max-height: 82vh; object-fit: contain; background: #131015; }
+    .lightbox-caption {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 18px 16px;
+      background: #1b171d;
+    }
+    .lightbox-caption strong { font-size: 1.02rem; }
+    .lightbox-info { display: flex; flex-direction: column; gap: 4px; }
+    .lightbox-details { color: rgba(255,255,255,.72); font-size: .9rem; }
+    .lightbox-price { font-weight: 800; color: #f1d18d; white-space: nowrap; }
+    .close-button {
+      position: absolute;
+      right: 14px;
+      top: 14px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(0,0,0,.42);
+      color: white;
+      font-size: 1.45rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 58px; }
+      .hero-art { min-height: 430px; }
+      .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .about { grid-template-columns: 1fr; }
+      .about-visual { min-height: 300px; }
+    }
+
+    @media (max-width: 620px) {
+      nav ul { gap: 6px; }
+      nav a { font-size: .92rem; padding-inline: 8px; }
+      .brand span:last-child { display: none; }
+      .hero-art { min-height: 355px; }
+      .gallery { grid-template-columns: 1fr; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .about { padding: 24px; border-radius: 26px; }
+      section { padding: 46px 0; }
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="shell nav">
+      <a class="brand" href="#top" aria-label="Art From The Heart home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Art From The Heart</span>
+      </a>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#about">About the Artist</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-<header>
-    <h1>Tanya Moiseev - Art From The Heart</h1>
-    <p>Original artwork inspired by beauty, imagination, and emotion.</p>
+  <main id="top">
+    <section class="shell hero">
+      <div>
+        <div class="eyebrow">Original paintings by Tanya Moiseev</div>
+        <h1>Art From <span>The Heart</span></h1>
+        <p>
+          A celebration of color, emotion, imagination, and the quiet joy of creating. Explore Tanya Moiseev’s artwork below—each small image opens into a larger view so the brushwork, texture, and details can shine.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#gallery">Explore the Gallery ↓</a>
+          <a class="button" href="#about">Meet Tanya</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="frame one"><img src="images/art01-large.jpg" alt="" /></div>
+        <div class="frame two"><img src="images/art04-large.jpg" alt="" /></div>
+        <div class="frame three"><img src="images/art07-large.jpg" alt="" /></div>
+      </div>
+    </section>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About the Artist</a>
-    </nav>
-</header>
-
-<main>
-
-<div class="intro">
-    <h2>Featured Collection</h2>
-    <p>
-        Welcome to my online gallery. Click any artwork to view a larger image and details.
-    </p>
-</div>
-
-<div class="gallery">
-
-    <div class="art-card">
-       <a href="images/ghostship.jpg">
-    <img src="images/ghostship-small.jpg" alt="Ghost Ship">
-   </a>
-
-        <div class="art-info">
-            <div class="art-title">Ghost Ship</div>
-            <div class="medium">Oil on Canvas</div>
-            <div class="sold">SOLD</div>
+    <section id="gallery">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">Selected works</div>
+            <h2>Gallery</h2>
+          </div>
+          <p>Click any painting to see a larger version. Replace the sample images in the <strong>images</strong> folder with Tanya’s real artwork whenever you’re ready.</p>
         </div>
 
-
-    <div class="art-card">
-       <a href="images/Elephant.jpeg">
-    <img src="images/Elephant-small.jpeg" alt="Elephant">
-   </a>
-
-        <div class="art-info">
-            <div class="art-title">Elephant</div>
-            <div class="medium">Acrylic on Canvas</div>
-            <div class="price">$525</div>
+        <div class="gallery" id="galleryGrid">
+          <button class="art-card" data-large="images/art01-large.jpg" data-title="Radiant Bloom" data-medium="Oil on canvas" data-price="$650" aria-label="Open Radiant Bloom, Oil on canvas, $650">
+            <img src="images/art01-thumb.jpg" alt="Radiant Bloom painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Radiant Bloom</span>
+              <span class="art-details"><span class="art-medium">Oil on canvas</span><span class="art-price">$650</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art02-large.jpg" data-title="Golden Meadow" data-medium="Acrylic on canvas" data-price="$575" aria-label="Open Golden Meadow, Acrylic on canvas, $575">
+            <img src="images/art02-thumb.jpg" alt="Golden Meadow painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Golden Meadow</span>
+              <span class="art-details"><span class="art-medium">Acrylic on canvas</span><span class="art-price">$575</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art03-large.jpg" data-title="Quiet Waters" data-medium="Oil on canvas" data-price="$725" aria-label="Open Quiet Waters, Oil on canvas, $725">
+            <img src="images/art03-thumb.jpg" alt="Quiet Waters painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Quiet Waters</span>
+              <span class="art-details"><span class="art-medium">Oil on canvas</span><span class="art-price">$725</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art04-large.jpg" data-title="Summer Song" data-medium="Acrylic on canvas" data-price="$495" aria-label="Open Summer Song, Acrylic on canvas, $495">
+            <img src="images/art04-thumb.jpg" alt="Summer Song painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Summer Song</span>
+              <span class="art-details"><span class="art-medium">Acrylic on canvas</span><span class="art-price">$495</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art05-large.jpg" data-title="Dreaming in Color" data-medium="Mixed media on canvas" data-price="$850" aria-label="Open Dreaming in Color, Mixed media on canvas, $850">
+            <img src="images/art05-thumb.jpg" alt="Dreaming in Color painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Dreaming in Color</span>
+              <span class="art-details"><span class="art-medium">Mixed media on canvas</span><span class="art-price">$850</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art06-large.jpg" data-title="Wild Garden" data-medium="Acrylic on canvas" data-price="$625" aria-label="Open Wild Garden, Acrylic on canvas, $625">
+            <img src="images/art06-thumb.jpg" alt="Wild Garden painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Wild Garden</span>
+              <span class="art-details"><span class="art-medium">Acrylic on canvas</span><span class="art-price">$625</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art07-large.jpg" data-title="Evening Glow" data-medium="Oil on canvas" data-price="$775" aria-label="Open Evening Glow, Oil on canvas, $775">
+            <img src="images/art07-thumb.jpg" alt="Evening Glow painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Evening Glow</span>
+              <span class="art-details"><span class="art-medium">Oil on canvas</span><span class="art-price">$775</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art08-large.jpg" data-title="Heart of Spring" data-medium="Acrylic on canvas" data-price="$550" aria-label="Open Heart of Spring, Acrylic on canvas, $550">
+            <img src="images/art08-thumb.jpg" alt="Heart of Spring painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Heart of Spring</span>
+              <span class="art-details"><span class="art-medium">Acrylic on canvas</span><span class="art-price">$550</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art09-large.jpg" data-title="Ocean Light" data-medium="Oil on canvas" data-price="$900" aria-label="Open Ocean Light, Oil on canvas, $900">
+            <img src="images/art09-thumb.jpg" alt="Ocean Light painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Ocean Light</span>
+              <span class="art-details"><span class="art-medium">Oil on canvas</span><span class="art-price">$900</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art10-large.jpg" data-title="Petal Dance" data-medium="Acrylic on canvas" data-price="$525" aria-label="Open Petal Dance, Acrylic on canvas, $525">
+            <img src="images/art10-thumb.jpg" alt="Petal Dance painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Petal Dance</span>
+              <span class="art-details"><span class="art-medium">Acrylic on canvas</span><span class="art-price">$525</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art11-large.jpg" data-title="Autumn Whisper" data-medium="Oil on canvas" data-price="$700" aria-label="Open Autumn Whisper, Oil on canvas, $700">
+            <img src="images/art11-thumb.jpg" alt="Autumn Whisper painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Autumn Whisper</span>
+              <span class="art-details"><span class="art-medium">Oil on canvas</span><span class="art-price">$700</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art12-large.jpg" data-title="Joyful Horizon" data-medium="Mixed media on canvas" data-price="$825" aria-label="Open Joyful Horizon, Mixed media on canvas, $825">
+            <img src="images/art12-thumb.jpg" alt="Joyful Horizon painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Joyful Horizon</span>
+              <span class="art-details"><span class="art-medium">Mixed media on canvas</span><span class="art-price">$825</span></span>
+            </span>
+          </button>
         </div>
-    
+      </div>
+    </section>
 
-    <div class="art-card">
-       <a href="images/YoungGirlHatMoon.jpeg">
-    <img src="images/YoungGirlHatMoon-small.jpeg" alt="Maya">
-   </a>
-
-        <div class="art-info">
-            <div class="art-title">Maya</div>
-            <div class="medium">Oil on Canvas</div>
-            <div class="price">$725</div>
+    <section id="about">
+      <div class="shell about">
+        <div class="about-visual" aria-hidden="true">
+          <div class="brush-script">Create<br>with heart.</div>
         </div>
+        <div class="about-copy">
+          <div class="eyebrow">About the artist</div>
+          <h2>Tanya Moiseev</h2>
+          <p>
+            Tanya paints from a place of curiosity, feeling, and delight in the creative process. Her work is inspired by the beauty found in everyday moments—light across a landscape, the energy of flowers, the movement of color, and the emotions that can be expressed without words.
+          </p>
+          <p>
+            For Tanya, painting is both discovery and connection. Each canvas is an invitation to slow down, look closely, and experience color in a personal way. “Art From The Heart” reflects her belief that creativity is most meaningful when it is sincere, joyful, and shared.
+          </p>
+          <div class="signature">— Tanya Moiseev</div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-</div>
+  <footer>
+    <div class="shell">© <span id="year"></span> Tanya Moiseev · Art From The Heart</div>
+  </footer>
 
-</main>
+  <dialog id="lightbox" aria-label="Artwork preview">
+    <div class="lightbox-wrap">
+      <button class="close-button" id="closeLightbox" aria-label="Close artwork preview">×</button>
+      <img class="lightbox-img" id="lightboxImage" alt="" />
+      <div class="lightbox-caption">
+        <div class="lightbox-info"><strong id="lightboxTitle"></strong><span class="lightbox-details" id="lightboxMedium"></span></div>
+        <span class="lightbox-price" id="lightboxPrice"></span>
+      </div>
+    </div>
+  </dialog>
 
-<footer>
-    © 2026 Tanya Moiseev - Art From The Heart
-</footer>
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxMedium = document.getElementById('lightboxMedium');
+    const lightboxPrice = document.getElementById('lightboxPrice');
+    const closeButton = document.getElementById('closeLightbox');
 
+    document.querySelectorAll('.art-card').forEach(card => {
+      card.addEventListener('click', () => {
+        lightboxImage.src = card.dataset.large;
+        lightboxImage.alt = card.dataset.title;
+        lightboxTitle.textContent = card.dataset.title;
+        lightboxMedium.textContent = card.dataset.medium;
+        lightboxPrice.textContent = card.dataset.price;
+        lightbox.showModal();
+      });
+    });
+
+    closeButton.addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('click', event => {
+      const rect = lightbox.getBoundingClientRect();
+      const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+      if (outside) lightbox.close();
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
