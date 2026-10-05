@@ -222,8 +222,14 @@
       align-items: center;
     }
 
-    .art-title { font-weight: 800; }
-    .art-number { color: var(--muted); font-size: .88rem; }
+    .art-meta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .art-title { font-weight: 800; font-size: 1.02rem; }
+    .art-details { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .art-medium { color: var(--muted); font-size: .88rem; font-style: italic; }
+    .art-price { color: var(--plum); font-weight: 800; font-size: .92rem; white-space: nowrap; }
 
     .about {
       display: grid;
@@ -305,14 +311,19 @@
     .lightbox-wrap { position: relative; }
     .lightbox-img { width: 100%; max-height: 82vh; object-fit: contain; background: #131015; }
     .lightbox-caption {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 18px 16px;
+      padding: 18px 22px 22px;
       background: #1b171d;
     }
-    .lightbox-caption strong { font-size: 1.02rem; }
+    .lightbox-caption strong { display: block; font-size: 1.15rem; margin-bottom: 10px; }
+    .lightbox-details {
+      display: grid;
+      gap: 5px;
+      color: rgba(255,255,255,.84);
+      font-size: .96rem;
+      line-height: 1.45;
+    }
+    .lightbox-details b { color: white; font-weight: 700; }
+    .lightbox-total { color: #f1d18d; font-weight: 800; }
     .close-button {
       position: absolute;
       right: 14px;
@@ -391,57 +402,100 @@
             <div class="eyebrow">Selected works</div>
             <h2>Gallery</h2>
           </div>
-          <p>Click any painting to see a larger, more detailed version of the painting.</p>
+          <p>Click any painting to see a larger view along with its media, size, price per square inch, and total price.</p>
         </div>
 
         <div class="gallery" id="galleryGrid">
-          <button class="art-card" data-large="images/art01-large.jpg" data-title="Radiant Bloom" aria-label="Open Radiant Bloom">
+          <button class="art-card" data-large="images/art01-large.jpg" data-title="Radiant Bloom" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Radiant Bloom">
             <img src="images/art01-thumb.jpg" alt="Radiant Bloom painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Radiant Bloom</span><span class="art-number">01</span></span>
+            <span class="art-meta">
+              <span class="art-title">Radiant Bloom</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art02-large.jpg" data-title="Golden Meadow" aria-label="Open Golden Meadow">
+          <button class="art-card" data-large="images/art02-large.jpg" data-title="Golden Meadow" data-medium="Acrylic on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Golden Meadow">
             <img src="images/art02-thumb.jpg" alt="Golden Meadow painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Golden Meadow</span><span class="art-number">02</span></span>
+            <span class="art-meta">
+              <span class="art-title">Golden Meadow</span>
+              <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art03-large.jpg" data-title="Quiet Waters" aria-label="Open Quiet Waters">
+          <button class="art-card" data-large="images/art03-large.jpg" data-title="Quiet Waters" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Quiet Waters">
             <img src="images/art03-thumb.jpg" alt="Quiet Waters painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Quiet Waters</span><span class="art-number">03</span></span>
+            <span class="art-meta">
+              <span class="art-title">Quiet Waters</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art04-large.jpg" data-title="Summer Song" aria-label="Open Summer Song">
+          <button class="art-card" data-large="images/art04-large.jpg" data-title="Summer Song" data-medium="Acrylic on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Summer Song">
             <img src="images/art04-thumb.jpg" alt="Summer Song painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Summer Song</span><span class="art-number">04</span></span>
+            <span class="art-meta">
+              <span class="art-title">Summer Song</span>
+              <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art05-large.jpg" data-title="Dreaming in Color" aria-label="Open Dreaming in Color">
+          <button class="art-card" data-large="images/art05-large.jpg" data-title="Dreaming in Color" data-medium="Mixed Media on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Dreaming in Color">
             <img src="images/art05-thumb.jpg" alt="Dreaming in Color painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Dreaming in Color</span><span class="art-number">05</span></span>
+            <span class="art-meta">
+              <span class="art-title">Dreaming in Color</span>
+              <span class="art-details"><span class="art-medium">Mixed Media on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art06-large.jpg" data-title="Wild Garden" aria-label="Open Wild Garden">
+          <button class="art-card" data-large="images/art06-large.jpg" data-title="Wild Garden" data-medium="Acrylic on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Wild Garden">
             <img src="images/art06-thumb.jpg" alt="Wild Garden painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Wild Garden</span><span class="art-number">06</span></span>
+            <span class="art-meta">
+              <span class="art-title">Wild Garden</span>
+              <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art07-large.jpg" data-title="Evening Glow" aria-label="Open Evening Glow">
+          <button class="art-card" data-large="images/art07-large.jpg" data-title="Evening Glow" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Evening Glow">
             <img src="images/art07-thumb.jpg" alt="Evening Glow painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Evening Glow</span><span class="art-number">07</span></span>
+            <span class="art-meta">
+              <span class="art-title">Evening Glow</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art08-large.jpg" data-title="Heart of Spring" aria-label="Open Heart of Spring">
+          <button class="art-card" data-large="images/art08-large.jpg" data-title="Heart of Spring" data-medium="Acrylic on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Heart of Spring">
             <img src="images/art08-thumb.jpg" alt="Heart of Spring painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Heart of Spring</span><span class="art-number">08</span></span>
+            <span class="art-meta">
+              <span class="art-title">Heart of Spring</span>
+              <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art09-large.jpg" data-title="Ocean Light" aria-label="Open Ocean Light">
+          <button class="art-card" data-large="images/art09-large.jpg" data-title="Ocean Light" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Ocean Light">
             <img src="images/art09-thumb.jpg" alt="Ocean Light painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Ocean Light</span><span class="art-number">09</span></span>
+            <span class="art-meta">
+              <span class="art-title">Ocean Light</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art10-large.jpg" data-title="Petal Dance" aria-label="Open Petal Dance">
+          <button class="art-card" data-large="images/art10-large.jpg" data-title="Petal Dance" data-medium="Acrylic on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Petal Dance">
             <img src="images/art10-thumb.jpg" alt="Petal Dance painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Petal Dance</span><span class="art-number">10</span></span>
+            <span class="art-meta">
+              <span class="art-title">Petal Dance</span>
+              <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art11-large.jpg" data-title="Autumn Whisper" aria-label="Open Autumn Whisper">
+          <button class="art-card" data-large="images/art11-large.jpg" data-title="Autumn Whisper" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Autumn Whisper">
             <img src="images/art11-thumb.jpg" alt="Autumn Whisper painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Autumn Whisper</span><span class="art-number">11</span></span>
+            <span class="art-meta">
+              <span class="art-title">Autumn Whisper</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
-          <button class="art-card" data-large="images/art12-large.jpg" data-title="Joyful Horizon" aria-label="Open Joyful Horizon">
+          <button class="art-card" data-large="images/art12-large.jpg" data-title="Joyful Horizon" data-medium="Mixed Media on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Joyful Horizon">
             <img src="images/art12-thumb.jpg" alt="Joyful Horizon painting thumbnail" />
-            <span class="art-meta"><span class="art-title">Joyful Horizon</span><span class="art-number">12</span></span>
+            <span class="art-meta">
+              <span class="art-title">Joyful Horizon</span>
+              <span class="art-details"><span class="art-medium">Mixed Media on Canvas</span><span class="art-price">$288</span></span>
+            </span>
+          </button>
+          <button class="art-card" data-large="images/art13-large.jpg" data-title="Artwork 13" data-medium="Oil on Canvas" data-size="12 × 12 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open Artwork 13">
+            <img src="images/art13-thumb.jpg" alt="Artwork 13 painting thumbnail" />
+            <span class="art-meta">
+              <span class="art-title">Artwork 13</span>
+              <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$288</span></span>
+            </span>
           </button>
         </div>
       </div>
@@ -489,7 +543,15 @@
     <div class="lightbox-wrap">
       <button class="close-button" id="closeLightbox" aria-label="Close artwork preview">×</button>
       <img class="lightbox-img" id="lightboxImage" alt="" />
-      <div class="lightbox-caption"><strong id="lightboxTitle"></strong><span>Art From The Heart</span></div>
+      <div class="lightbox-caption">
+        <strong id="lightboxTitle"></strong>
+        <div class="lightbox-details">
+          <div><b>Media:</b> <span id="lightboxMedium"></span></div>
+          <div><b>Size:</b> <span id="lightboxSize"></span></div>
+          <div><b>Price:</b> <span id="lightboxRate"></span></div>
+          <div class="lightbox-total"><b>Total Price:</b> <span id="lightboxTotal"></span></div>
+        </div>
+      </div>
     </div>
   </dialog>
 
@@ -497,6 +559,10 @@
     const lightbox = document.getElementById('lightbox');
     const lightboxImage = document.getElementById('lightboxImage');
     const lightboxTitle = document.getElementById('lightboxTitle');
+    const lightboxMedium = document.getElementById('lightboxMedium');
+    const lightboxSize = document.getElementById('lightboxSize');
+    const lightboxRate = document.getElementById('lightboxRate');
+    const lightboxTotal = document.getElementById('lightboxTotal');
     const closeButton = document.getElementById('closeLightbox');
 
     document.querySelectorAll('.art-card').forEach(card => {
@@ -504,6 +570,10 @@
         lightboxImage.src = card.dataset.large;
         lightboxImage.alt = card.dataset.title;
         lightboxTitle.textContent = card.dataset.title;
+        lightboxMedium.textContent = card.dataset.medium;
+        lightboxSize.textContent = card.dataset.size;
+        lightboxRate.textContent = card.dataset.rate;
+        lightboxTotal.textContent = card.dataset.total;
         lightbox.showModal();
       });
     });
