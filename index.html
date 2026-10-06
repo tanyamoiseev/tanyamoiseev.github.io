@@ -341,6 +341,25 @@
       opacity: .85;
     }
 
+    .footer-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      font-size: .84rem;
+    }
+    .footer-links a {
+      color: var(--plum);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .footer-links a:hover,
+    .footer-links a:focus-visible {
+      text-decoration: underline;
+      outline: none;
+    }
+
     dialog {
       width: min(96vw, 1060px);
       border: 0;
@@ -609,6 +628,10 @@
     <div class="shell">
       <div>© <span id="year"></span> Tanya Moiseev · Art From The Heart</div>
       <div class="copyright-notice">All rights reserved. Artwork may not be reproduced, distributed, or used without written permission.</div>
+      <div class="footer-links">
+        <a href="terms.html">Terms &amp; Conditions</a>
+        <a href="shipping-returns.html">Shipping &amp; Returns</a>
+      </div>
     </div>
   </footer>
 
