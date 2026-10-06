@@ -185,6 +185,47 @@
 
     .section-heading p { margin: 0; color: var(--muted); max-width: 550px; line-height: 1.65; }
 
+
+    .gallery-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 26px;
+    }
+
+    .filter-button {
+      appearance: none;
+      border: 1px solid rgba(118,80,111,.18);
+      background: rgba(255,255,255,.72);
+      color: var(--plum);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font: inherit;
+      font-size: .92rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .filter-button:hover,
+    .filter-button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(201,108,125,.42);
+      box-shadow: 0 8px 18px rgba(70,47,63,.08);
+      outline: none;
+    }
+
+    .filter-button[aria-pressed="true"] {
+      background: var(--plum);
+      color: white;
+      border-color: var(--plum);
+      box-shadow: 0 8px 18px rgba(118,80,111,.18);
+    }
+
+    .art-card[hidden] {
+      display: none;
+    }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -405,6 +446,15 @@
           <p>Click any painting to see a larger view along with its media, size, price per square inch, and total price.</p>
         </div>
 
+
+        <div class="gallery-filters" aria-label="Filter gallery by medium">
+          <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All Works</button>
+          <button class="filter-button" type="button" data-filter="oil" aria-pressed="false">Oil</button>
+          <button class="filter-button" type="button" data-filter="acrylic" aria-pressed="false">Acrylic</button>
+          <button class="filter-button" type="button" data-filter="watercolor" aria-pressed="false">Watercolor</button>
+          <button class="filter-button" type="button" data-filter="mixed" aria-pressed="false">Mixed Media</button>
+        </div>
+
         <div class="gallery" id="galleryGrid">
           <button class="art-card" data-large="images/art01-large.jpg" data-title="The Long-Stemmed Dreamer" data-medium="Oil on Canvas" data-size="20 × 16 in" data-rate="$2.00 / sq. in." data-total="$288" aria-label="Open The Long-Stemmed Dreamer">
             <img src="images/art01-thumb.jpg" alt="The Long-Stemmed Dreamer painting thumbnail" />
@@ -578,6 +628,30 @@
     const lightboxRate = document.getElementById('lightboxRate');
     const lightboxTotal = document.getElementById('lightboxTotal');
     const closeButton = document.getElementById('closeLightbox');
+
+
+    const filterButtons = document.querySelectorAll('.filter-button');
+    const galleryCards = document.querySelectorAll('.art-card');
+
+    function mediumGroup(card) {
+      const medium = (card.dataset.medium || '').toLowerCase();
+      if (medium.includes('oil')) return 'oil';
+      if (medium.includes('acrylic')) return 'acrylic';
+      if (medium.includes('watercolor') || medium.includes('watercolour')) return 'watercolor';
+      return 'mixed';
+    }
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.filter;
+        filterButtons.forEach(item => {
+          item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+        });
+        galleryCards.forEach(card => {
+          card.hidden = !(selected === 'all' || mediumGroup(card) === selected);
+        });
+      });
+    });
 
     document.querySelectorAll('.art-card').forEach(card => {
       card.addEventListener('click', () => {
