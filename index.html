@@ -334,6 +334,13 @@
       font-size: .92rem;
     }
 
+    .copyright-notice {
+      margin-top: 8px;
+      font-size: .82rem;
+      line-height: 1.5;
+      opacity: .85;
+    }
+
     dialog {
       width: min(96vw, 1060px);
       border: 0;
@@ -599,7 +606,10 @@
   </main>
 
   <footer>
-    <div class="shell">© <span id="year"></span> Tanya Moiseev · Art From The Heart</div>
+    <div class="shell">
+      <div>© <span id="year"></span> Tanya Moiseev · Art From The Heart</div>
+      <div class="copyright-notice">All rights reserved. Artwork may not be reproduced, distributed, or used without written permission.</div>
+    </div>
   </footer>
 
   <dialog id="lightbox" aria-label="Artwork preview">
