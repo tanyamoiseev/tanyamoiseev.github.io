@@ -373,11 +373,24 @@
     dialog::backdrop { background: rgba(33,24,31,.76); backdrop-filter: blur(8px); }
 
     .lightbox-wrap { position: relative; }
-    .lightbox-img { width: 100%; max-height: 82vh; object-fit: contain; background: #131015; }
+    .lightbox-img {
+      width: 100%;
+      max-height: 82vh;
+      object-fit: contain;
+      background: #131015;
+      opacity: 1;
+      transition: opacity .12s ease;
+    }
+    .lightbox-img.loading { opacity: 0; }
     .lightbox-caption {
       padding: 18px 22px 22px;
       background: #1b171d;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 28px;
+      align-items: center;
     }
+    .lightbox-info { min-width: 0; }
     .lightbox-caption strong { display: block; font-size: 1.15rem; margin-bottom: 10px; }
     .lightbox-details {
       display: grid;
@@ -389,12 +402,28 @@
     .lightbox-details b { color: white; font-weight: 700; }
     .lightbox-total { color: #f1d18d; font-weight: 800; }
 
-    .purchase-area { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
-    .purchase-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .purchase-area {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+      min-width: 210px;
+      text-align: right;
+    }
+    .purchase-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
     .purchase-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 16px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: .92rem; }
     .purchase-button.inquire { color: white; border: 1px solid rgba(255,255,255,.30); background: rgba(255,255,255,.08); }
     .purchase-button.inquire:hover, .purchase-button.inquire:focus-visible { background: rgba(255,255,255,.14); outline: none; }
-    .purchase-note { margin: 10px 0 0; color: rgba(255,255,255,.70); font-size: .84rem; line-height: 1.5; }
+    .purchase-note {
+      margin: 10px 0 0 auto;
+      max-width: 260px;
+      color: rgba(255,255,255,.70);
+      font-size: .82rem;
+      line-height: 1.45;
+    }
     .sold-note { margin-top: 16px; display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.10); color: rgba(255,255,255,.88); font-weight: 800; font-size: .86rem; letter-spacing: .04em; text-transform: uppercase; }
     .close-button {
       position: absolute;
@@ -417,6 +446,13 @@
       .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .about { grid-template-columns: 1fr; }
       .about-visual { min-height: 300px; }
+    }
+
+    @media (max-width: 720px) {
+      .lightbox-caption { grid-template-columns: 1fr; gap: 16px; align-items: start; }
+      .purchase-area { min-width: 0; text-align: left; }
+      .purchase-actions { justify-content: flex-start; }
+      .purchase-note { margin-left: 0; }
     }
 
     @media (max-width: 620px) {
@@ -655,19 +691,24 @@
       <button class="close-button" id="closeLightbox" aria-label="Close artwork preview">×</button>
       <img class="lightbox-img" id="lightboxImage" alt="" />
       <div class="lightbox-caption">
-        <strong id="lightboxTitle"></strong>
-        <div class="lightbox-details">
-          <div><b>Media:</b> <span id="lightboxMedium"></span></div>
-          <div><b>Size:</b> <span id="lightboxSize"></span></div>
-          <div><b>Price:</b> <span id="lightboxRate"></span></div>
-          <div class="lightbox-total"><b>Total Price:</b> <span id="lightboxTotal"></span></div>
+        <div class="lightbox-info">
+          <strong id="lightboxTitle"></strong>
+          <div class="lightbox-details">
+            <div><b>Media:</b> <span id="lightboxMedium"></span></div>
+            <div><b>Size:</b> <span id="lightboxSize"></span></div>
+            <div><b>Price:</b> <span id="lightboxRate"></span></div>
+            <div class="lightbox-total"><b>Total Price:</b> <span id="lightboxTotal"></span></div>
+          </div>
         </div>
         <div class="purchase-area">
           <div class="purchase-actions" id="purchaseActions">
             <a class="purchase-button inquire" id="inquireButton" href="#">Inquire to Purchase</a>
           </div>
           <div class="sold-note" id="soldNote" hidden>Sold</div>
-          <p class="purchase-note" id="purchaseNote">Questions about this artwork? Contact Tanya to confirm availability, shipping, or local pickup.</p>
+          <p class="purchase-note" id="purchaseNote">
+            Questions about this artwork? Contact Tanya to confirm availability, shipping, or local pickup.<br>
+            <a href="mailto:tanyamoiseev@comcast.net" style="color:inherit;">tanyamoiseev@comcast.net</a>
+          </p>
         </div>
       </div>
     </div>
@@ -686,6 +727,13 @@
     const purchaseActions = document.getElementById('purchaseActions');
     const purchaseNote = document.getElementById('purchaseNote');
     const soldNote = document.getElementById('soldNote');
+
+    inquireButton.addEventListener('click', event => {
+      event.preventDefault();
+      if (inquireButton.dataset.mailto) {
+        window.location.href = inquireButton.dataset.mailto;
+      }
+    });
 
 
     const filterButtons = document.querySelectorAll('.filter-button');
@@ -713,8 +761,15 @@
 
     document.querySelectorAll('.art-card').forEach(card => {
       card.addEventListener('click', () => {
-        lightboxImage.src = card.dataset.large;
+        lightboxImage.classList.add('loading');
         lightboxImage.alt = card.dataset.title;
+
+        const nextImage = new Image();
+        nextImage.onload = () => {
+          lightboxImage.src = card.dataset.large;
+          lightboxImage.classList.remove('loading');
+        };
+        nextImage.src = card.dataset.large;
         lightboxTitle.textContent = card.dataset.title;
         lightboxMedium.textContent = card.dataset.medium;
         lightboxSize.textContent = card.dataset.size;
@@ -731,7 +786,9 @@
         if (!isSold) {
           const subject = `Inquiry about ${card.dataset.title}`;
           const body = `Hi Tanya,\n\nI'm interested in ${card.dataset.title} and would like to ask about availability and purchase options.\n\nThank you.`;
-          inquireButton.href = `mailto:tanyamoiseev@comcast.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const mailto = `mailto:tanyamoiseev@comcast.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          inquireButton.href = mailto;
+          inquireButton.dataset.mailto = mailto;
         }
 
         lightbox.showModal();
