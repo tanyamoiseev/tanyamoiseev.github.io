@@ -388,13 +388,14 @@
     }
     .lightbox-details b { color: white; font-weight: 700; }
     .lightbox-total { color: #f1d18d; font-weight: 800; }
-    .purchase-area { margin-top:18px; padding-top:16px; border-top:1px solid rgba(255,255,255,.12); }
-    .purchase-actions { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
-    .purchase-button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; padding:11px 16px; border-radius:999px; text-decoration:none; font-weight:800; font-size:.92rem; }
-    .purchase-button.inquire { color:white; border:1px solid rgba(255,255,255,.30); background:rgba(255,255,255,.08); }
-    .purchase-button.paypal { background:white; color:var(--plum); }
-    .purchase-note { margin:10px 0 0; color:rgba(255,255,255,.70); font-size:.84rem; line-height:1.5; }
-    .sold-note { margin-top:16px; display:inline-block; padding:8px 12px; border-radius:999px; background:rgba(255,255,255,.10); font-weight:800; }
+
+    .purchase-area { margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
+    .purchase-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .purchase-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 11px 16px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: .92rem; }
+    .purchase-button.inquire { color: white; border: 1px solid rgba(255,255,255,.30); background: rgba(255,255,255,.08); }
+    .purchase-button.inquire:hover, .purchase-button.inquire:focus-visible { background: rgba(255,255,255,.14); outline: none; }
+    .purchase-note { margin: 10px 0 0; color: rgba(255,255,255,.70); font-size: .84rem; line-height: 1.5; }
+    .sold-note { margin-top: 16px; display: inline-block; padding: 8px 12px; border-radius: 999px; background: rgba(255,255,255,.10); color: rgba(255,255,255,.88); font-weight: 800; font-size: .86rem; letter-spacing: .04em; text-transform: uppercase; }
     .close-button {
       position: absolute;
       right: 14px;
@@ -662,7 +663,9 @@
           <div class="lightbox-total"><b>Total Price:</b> <span id="lightboxTotal"></span></div>
         </div>
         <div class="purchase-area">
-          <div class="purchase-actions" id="purchaseActions"><a class="purchase-button inquire" id="inquireButton" href="#">Inquire to Purchase</a><a class="purchase-button paypal" id="paypalButton" href="#" hidden>Purchase with PayPal</a></div>
+          <div class="purchase-actions" id="purchaseActions">
+            <a class="purchase-button inquire" id="inquireButton" href="#">Inquire to Purchase</a>
+          </div>
           <div class="sold-note" id="soldNote" hidden>Sold</div>
           <p class="purchase-note" id="purchaseNote">Questions about this artwork? Contact Tanya to confirm availability, shipping, or local pickup.</p>
         </div>
@@ -680,7 +683,6 @@
     const lightboxTotal = document.getElementById('lightboxTotal');
     const closeButton = document.getElementById('closeLightbox');
     const inquireButton = document.getElementById('inquireButton');
-    const paypalButton = document.getElementById('paypalButton');
     const purchaseActions = document.getElementById('purchaseActions');
     const purchaseNote = document.getElementById('purchaseNote');
     const soldNote = document.getElementById('soldNote');
@@ -718,24 +720,27 @@
         lightboxSize.textContent = card.dataset.size;
         lightboxRate.textContent = card.dataset.rate;
         lightboxTotal.textContent = card.dataset.total;
+
         const visiblePrice = card.querySelector('.art-price')?.textContent.trim().toUpperCase() || '';
         const isSold = visiblePrice === 'SOLD' || (card.dataset.total || '').trim().toUpperCase() === 'SOLD';
-        purchaseActions.hidden = isSold; purchaseNote.hidden = isSold; soldNote.hidden = !isSold;
+
+        purchaseActions.hidden = isSold;
+        purchaseNote.hidden = isSold;
+        soldNote.hidden = !isSold;
+
         if (!isSold) {
           const subject = `Inquiry about ${card.dataset.title}`;
           const body = `Hi Tanya,\n\nI'm interested in ${card.dataset.title} and would like to ask about availability and purchase options.\n\nThank you.`;
           inquireButton.href = `mailto:tanyamoiseev@comcast.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
-        paypalButton.hidden = true;
+
         lightbox.showModal();
       });
     });
 
     closeButton.addEventListener('click', () => lightbox.close());
     lightbox.addEventListener('click', event => {
-      const rect = lightbox.getBoundingClientRect();
-      const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
-      if (outside) lightbox.close();
+      if (event.target === lightbox) lightbox.close();
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
