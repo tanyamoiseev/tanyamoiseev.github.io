@@ -555,7 +555,7 @@
               <span class="art-details"><span class="art-medium">Acrylic on Canvas</span><span class="art-price">SOLD</span></span>
             </span>
           </button>
-          <button class="art-card" data-large="images/art05-large.jpg" data-title="Patchwork Soul" data-medium="Mixed Media on Canvas" data-size="16 × 24 in" data-rate="$2.00 / sq. in." data-total="SOLD" aria-label="Open Patchwork Soul">
+          <button class="art-card" data-large="images/art05-large.jpg" data-title="Patchwork Soul" data-medium="Mixed Media on Canvas" data-size="16 × 24 in" data-rate="$2.00 / sq. in." data-total="$768" aria-label="Open Patchwork Soul">
             <img src="images/art05-thumb.jpg" alt="Patchwork Soul painting thumbnail" />
             <span class="art-meta">
               <span class="art-title">Patchwork Soul</span>
@@ -742,6 +742,30 @@
 
     const filterButtons = document.querySelectorAll('.filter-button');
     const galleryCards = document.querySelectorAll('.art-card');
+
+    // Single source of truth:
+    // edit data-title, data-medium, data-size, data-rate, and data-total
+    // on each .art-card and both the thumbnail card and large-image view stay in sync.
+    function syncArtworkCard(card) {
+      const titleEl = card.querySelector('.art-title');
+      const mediumEl = card.querySelector('.art-medium');
+      const priceEl = card.querySelector('.art-price');
+      const imageEl = card.querySelector('img');
+
+      if (titleEl) titleEl.textContent = card.dataset.title || '';
+      if (mediumEl) mediumEl.textContent = card.dataset.medium || '';
+      if (priceEl) priceEl.textContent = card.dataset.total || '';
+
+      if (imageEl && card.dataset.title) {
+        imageEl.alt = `${card.dataset.title} painting thumbnail`;
+      }
+
+      if (card.dataset.title) {
+        card.setAttribute('aria-label', `Open ${card.dataset.title}`);
+      }
+    }
+
+    galleryCards.forEach(syncArtworkCard);
 
     function mediumGroup(card) {
       const medium = (card.dataset.medium || '').toLowerCase();
