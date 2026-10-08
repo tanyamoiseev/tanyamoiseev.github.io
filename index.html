@@ -469,6 +469,20 @@
       .about { padding: 24px; border-radius: 26px; }
       section { padding: 46px 0; }
     }
+    /* How to Purchase */
+    .purchase-guide { padding-top: 26px; }
+    .purchase-guide-panel { background: rgba(255,255,255,.72); border: 1px solid rgba(118,80,111,.12); border-radius: 30px; padding: clamp(24px,4vw,44px); box-shadow: var(--shadow); }
+    .purchase-guide h2 { margin: 0 0 14px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem,4vw,3.2rem); letter-spacing: -.035em; }
+    .purchase-guide-intro { color: var(--muted); line-height: 1.7; max-width: 760px; margin: 0 0 28px; }
+    .purchase-steps { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+    .purchase-step { background: #fffaf7; border: 1px solid rgba(118,80,111,.10); border-radius: 20px; padding: 20px; }
+    .purchase-step-number { display: inline-grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--plum); color: white; font-weight: 800; margin-bottom: 14px; }
+    .purchase-step h3 { margin: 0 0 9px; font-size: 1.02rem; }
+    .purchase-step p { margin: 0; color: var(--muted); line-height: 1.6; font-size: .93rem; }
+    .purchase-guide-foot { margin: 22px 0 0; color: var(--muted); line-height: 1.7; }
+    .purchase-guide-foot a { color: var(--plum); font-weight: 700; }
+    @media (max-width: 900px) { .purchase-steps { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+    @media (max-width: 620px) { .purchase-steps { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -481,6 +495,7 @@
       <nav aria-label="Main navigation">
         <ul>
           <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#how-to-purchase">How to Purchase</a></li>
           <li><a href="#about">About the Artist</a></li>
         </ul>
       </nav>
@@ -639,6 +654,23 @@
               <span class="art-details"><span class="art-medium">Oil on Canvas</span><span class="art-price">$880</span></span>
             </span>
           </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-to-purchase" class="purchase-guide" aria-labelledby="purchase-guide-heading">
+      <div class="shell">
+        <div class="purchase-guide-panel">
+          <div class="eyebrow">Collecting original art</div>
+          <h2 id="purchase-guide-heading">How to Purchase</h2>
+          <p class="purchase-guide-intro">Each painting is a one-of-a-kind original. Purchasing is personal and straightforward, with Tanya available to answer questions along the way.</p>
+          <div class="purchase-steps">
+            <div class="purchase-step"><span class="purchase-step-number">1</span><h3>Find a painting</h3><p>Browse the gallery and select a painting to see its size, medium, and listed price.</p></div>
+            <div class="purchase-step"><span class="purchase-step-number">2</span><h3>Send an inquiry</h3><p>Choose <strong>Inquire to Purchase</strong> in the enlarged view. Tanya will reply to confirm availability and answer your questions.</p></div>
+            <div class="purchase-step"><span class="purchase-step-number">3</span><h3>Confirm the details</h3><p>When you are ready to proceed, provide your shipping address so Tanya can calculate shipping and confirm the final total and payment instructions.</p></div>
+            <div class="purchase-step"><span class="purchase-step-number">4</span><h3>Receive your artwork</h3><p>After payment is confirmed, the painting will be carefully packaged and shipped. Tracking information will be shared when available.</p></div>
+          </div>
+          <p class="purchase-guide-foot">Questions? Email <a href="mailto:tanyamoiseev@comcast.net">tanyamoiseev@comcast.net</a>. Please also review our <a href="terms.html">Terms &amp; Conditions</a> and <a href="shipping-returns.html">Shipping &amp; Returns</a> policies.</p>
         </div>
       </div>
     </section>
