@@ -495,6 +495,28 @@
     .promise-item h3 { margin: 0 0 9px; font-size: 1.05rem; }
     .promise-item p { margin: 0; color: var(--muted); line-height: 1.65; font-size: .93rem; }
     @media (max-width: 720px) { .promise-grid { grid-template-columns: 1fr; } }
+
+    /* On-page contact form */
+    #contact { scroll-margin-top: 90px; }
+    .contact-panel { background:rgba(255,255,255,.78);border:1px solid rgba(118,80,111,.14);border-radius:30px;padding:clamp(24px,4vw,44px);box-shadow:var(--shadow); }
+    .contact-panel h2 { font-family:Georgia,"Times New Roman",serif;font-size:clamp(2rem,4vw,3.2rem);margin:0 0 12px; }
+    .contact-intro { color:var(--muted);line-height:1.7;max-width:720px; }
+    .contact-fields { display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:24px; }
+    .contact-field { display:flex;flex-direction:column;gap:7px;min-width:0; }
+    .contact-field.full { grid-column:1/-1; }
+    .contact-field label { color:var(--ink);font-size:.92rem;font-weight:700; }
+    .contact-field input,.contact-field textarea { font:inherit;width:100%;border:1px solid rgba(118,80,111,.24);border-radius:13px;padding:13px 14px;background:white;color:var(--ink); }
+    .contact-field input:focus,.contact-field textarea:focus { outline:2px solid var(--rose);outline-offset:1px; }
+    .contact-field textarea { min-height:150px;resize:vertical; }
+    .contact-footer { display:flex;align-items:center;flex-wrap:wrap;gap:16px;margin-top:20px; }
+    .contact-submit { border:0;border-radius:999px;background:var(--plum);color:white;font:inherit;font-weight:800;padding:13px 22px;cursor:pointer; }
+    .contact-submit:disabled { opacity:.6;cursor:wait; }
+    .contact-status { margin-top:14px;font-weight:700;line-height:1.5; }
+    .contact-status[data-state="success"] { color:#286044; }
+    .contact-status[data-state="error"] { color:#9c3346; }
+    .contact-small { color:var(--muted);font-size:.86rem;line-height:1.65; }
+    .contact-small a { color:var(--plum);font-weight:700; }
+    @media(max-width:620px) { .contact-fields { grid-template-columns:1fr; } .nav { flex-wrap:wrap;padding:10px 0; } nav ul { flex-wrap:wrap;justify-content:center;gap:2px 6px; } }
   </style>
 </head>
 <body>
@@ -509,7 +531,7 @@
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#how-to-purchase">How to Purchase</a></li>
           <li><a href="#about">About the Artist</a></li>
-          <li><a href="mailto:tanyamoiseev@comcast.net?subject=Art%20From%20The%20Heart%20-%20General%20Inquiry">Contact Tanya</a></li>
+          <li><a href="#contact">Contact Tanya</a></li>
         </ul>
       </nav>
     </div>
@@ -722,6 +744,33 @@
       </div>
     </section>
 
+
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="shell">
+        <div class="contact-panel">
+          <div class="eyebrow">Questions &amp; artwork inquiries</div>
+          <h2 id="contact-heading">Contact Tanya</h2>
+          <p class="contact-intro">Interested in a painting, or have a question about Tanya's work? Send a message here—no email program is required.</p>
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="2323f8f9-b4f2-47b2-867d-53e7fba1a04a">
+            <input type="hidden" name="subject" id="contactSubject" value="Art From The Heart - General Inquiry">
+            <input type="hidden" name="from_name" value="Art From The Heart">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+            <div class="contact-fields">
+              <div class="contact-field"><label for="contactName">Your name *</label><input id="contactName" name="name" type="text" autocomplete="name" maxlength="120" required></div>
+              <div class="contact-field"><label for="contactEmail">Email address *</label><input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+              <div class="contact-field full"><label for="contactArtwork">Artwork of interest (optional)</label><input id="contactArtwork" name="artwork" type="text" maxlength="160" placeholder="General inquiry or painting title"></div>
+              <div class="contact-field full"><label for="contactMessage">Your message *</label><textarea id="contactMessage" name="message" maxlength="4000" required placeholder="How can Tanya help you?"></textarea></div>
+            </div>
+            <div class="h-captcha" data-captcha="true"></div>
+            <div class="contact-footer"><button type="submit" id="contactSubmit" class="contact-submit">Send Inquiry</button><span class="contact-small">* Required fields</span></div>
+            <p id="contactStatus" class="contact-status" role="status" aria-live="polite" hidden></p>
+          </form>
+          <p class="contact-small">Having trouble with the form? Email <a href="mailto:tanyamoiseev@comcast.net">tanyamoiseev@comcast.net</a> directly. Please do not include payment information. Read our <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </section>
+
     <section id="about">
       <div class="shell about">
         <div>
@@ -765,7 +814,8 @@
       <div class="footer-links">
         <a href="terms.html">Terms &amp; Conditions</a>
         <a href="shipping-returns.html">Shipping &amp; Returns</a>
-        <a href="mailto:tanyamoiseev@comcast.net?subject=Art%20From%20The%20Heart%20-%20General%20Inquiry">Contact Tanya</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="#contact">Contact Tanya</a>
       </div>
     </div>
   </footer>
@@ -786,7 +836,7 @@
         </div>
         <div class="purchase-area">
           <div class="purchase-actions" id="purchaseActions">
-            <a class="purchase-button inquire" id="inquireButton" href="#">Inquire to Purchase</a>
+            <a class="purchase-button inquire" id="inquireButton" href="#contact">Inquire to Purchase</a>
           </div>
           <div class="sold-note" id="soldNote" hidden>Sold</div>
           <p class="purchase-note" id="purchaseNote">
@@ -812,10 +862,68 @@
     const purchaseNote = document.getElementById('purchaseNote');
     const soldNote = document.getElementById('soldNote');
 
+    const contactForm = document.getElementById('contactForm');
+    const contactArtwork = document.getElementById('contactArtwork');
+    const contactMessage = document.getElementById('contactMessage');
+    const contactSubject = document.getElementById('contactSubject');
+    const contactStatus = document.getElementById('contactStatus');
+    const contactSubmit = document.getElementById('contactSubmit');
+
+    function prepareArtworkInquiry(title) {
+      contactArtwork.value = title;
+      contactSubject.value = `Art From The Heart - Inquiry about ${title}`;
+      contactMessage.value = `Hello Tanya, I'm interested in ${title} and would like to ask about availability and purchase options.`;
+      contactStatus.hidden = true;
+    }
+
     inquireButton.addEventListener('click', event => {
       event.preventDefault();
-      if (inquireButton.dataset.mailto) {
-        window.location.href = inquireButton.dataset.mailto;
+      lightbox.close();
+      window.location.hash = 'contact';
+      document.getElementById('contactName').focus({preventScroll:true});
+    });
+
+    document.querySelectorAll('a[href="#contact"]').forEach(link => {
+      if (link === inquireButton) return;
+      link.addEventListener('click', () => {
+        contactArtwork.value = '';
+        contactSubject.value = 'Art From The Heart - General Inquiry';
+        contactMessage.value = '';
+        contactStatus.hidden = true;
+      });
+    });
+
+    contactForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (!contactForm.reportValidity()) return;
+      const captcha = contactForm.querySelector('[name="h-captcha-response"]');
+      if (!captcha || !captcha.value.trim()) {
+        contactStatus.textContent = 'Please complete the hCaptcha verification before sending.';
+        contactStatus.dataset.state = 'error';
+        contactStatus.hidden = false;
+        return;
+      }
+      contactSubmit.disabled = true;
+      contactSubmit.textContent = 'Sending…';
+      contactStatus.hidden = true;
+      try {
+        const response = await fetch('https://api.web3forms.com/submit', {
+          method:'POST', body:new FormData(contactForm), headers:{Accept:'application/json'}
+        });
+        const result = await response.json();
+        if (!response.ok || !result.success) throw new Error(result.message || 'Unable to send inquiry.');
+        contactStatus.textContent = 'Thank you! Your message was sent successfully. Tanya will respond as soon as possible.';
+        contactStatus.dataset.state = 'success';
+        contactForm.reset();
+        contactSubject.value = 'Art From The Heart - General Inquiry';
+      } catch (error) {
+        contactStatus.textContent = 'Your message could not be confirmed as sent. Please try again or email tanyamoiseev@comcast.net directly.';
+        contactStatus.dataset.state = 'error';
+      } finally {
+        contactStatus.hidden = false;
+        contactSubmit.disabled = false;
+        contactSubmit.textContent = 'Send Inquiry';
+        if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') window.hcaptcha.reset();
       }
     });
 
@@ -891,13 +999,7 @@
         purchaseNote.hidden = isSold;
         soldNote.hidden = !isSold;
 
-        if (!isSold) {
-          const subject = `Inquiry about ${card.dataset.title}`;
-          const body = `Hi Tanya,\n\nI'm interested in ${card.dataset.title} and would like to ask about availability and purchase options.\n\nThank you.`;
-          const mailto = `mailto:tanyamoiseev@comcast.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          inquireButton.href = mailto;
-          inquireButton.dataset.mailto = mailto;
-        }
+        if (!isSold) prepareArtworkInquiry(card.dataset.title);
 
         lightbox.showModal();
       });
@@ -910,5 +1012,6 @@
 
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
+<script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>
