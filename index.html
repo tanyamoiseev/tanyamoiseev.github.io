@@ -483,6 +483,18 @@
     .purchase-guide-foot a { color: var(--plum); font-weight: 700; }
     @media (max-width: 900px) { .purchase-steps { grid-template-columns: repeat(2,minmax(0,1fr)); } }
     @media (max-width: 620px) { .purchase-steps { grid-template-columns: 1fr; } }
+
+    /* Art From The Heart Promise */
+    .promise-section { padding-top: 18px; }
+    .promise-panel { background: rgba(255,255,255,.64); border: 1px solid rgba(118,80,111,.12); border-radius: 30px; padding: clamp(24px,4vw,44px); box-shadow: var(--shadow); }
+    .promise-panel h2 { margin: 0 0 14px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(2rem,4vw,3.2rem); letter-spacing: -.035em; }
+    .promise-intro { color: var(--muted); line-height: 1.75; max-width: 800px; margin: 0 0 26px; }
+    .promise-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+    .promise-item { padding: 24px 20px; background: #fffaf7; border: 1px solid rgba(118,80,111,.10); border-radius: 20px; }
+    .promise-symbol { font-family: Georgia,serif; font-size: 1.7rem; color: var(--rose); display: block; margin-bottom: 12px; }
+    .promise-item h3 { margin: 0 0 9px; font-size: 1.05rem; }
+    .promise-item p { margin: 0; color: var(--muted); line-height: 1.65; font-size: .93rem; }
+    @media (max-width: 720px) { .promise-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -679,6 +691,33 @@
             <div class="purchase-step"><span class="purchase-step-number">4</span><h3>Receive your artwork</h3><p>After payment is confirmed, the painting will be carefully packaged and shipped. Tracking information will be shared when available.</p></div>
           </div>
           <p class="purchase-guide-foot">Questions? Email <a href="mailto:tanyamoiseev@comcast.net">tanyamoiseev@comcast.net</a>. Please also review our <a href="terms.html">Terms &amp; Conditions</a> and <a href="shipping-returns.html">Shipping &amp; Returns</a> policies.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="art-promise" class="promise-section" aria-labelledby="promise-heading">
+      <div class="shell">
+        <div class="promise-panel">
+          <div class="eyebrow">The Art From The Heart Promise</div>
+          <h2 id="promise-heading">Original Art, Created with Care</h2>
+          <p class="promise-intro">Every painting is a unique expression of Tanya's creativity, thoughtfully made and offered directly from the artist. From your first question to the arrival of your artwork, the experience is personal.</p>
+          <div class="promise-grid">
+            <div class="promise-item">
+              <span class="promise-symbol" aria-hidden="true">✦</span>
+              <h3>Certificate of Authenticity</h3>
+              <p>Each original painting comes with a certificate identifying the artwork and signed by Tanya.</p>
+            </div>
+            <div class="promise-item">
+              <span class="promise-symbol" aria-hidden="true">◇</span>
+              <h3>Carefully Packaged</h3>
+              <p>Artwork is thoughtfully packaged for shipment, with tracking information shared when available.</p>
+            </div>
+            <div class="promise-item">
+              <span class="promise-symbol" aria-hidden="true">♡</span>
+              <h3>Personal Service</h3>
+              <p>Communicate directly with Tanya to confirm availability, discuss the painting, and arrange the details of your purchase.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
