@@ -904,10 +904,15 @@
     const contactDialog = document.getElementById('contactDialog');
     const closeContact = document.getElementById('closeContact');
     const contactName = document.getElementById('contactName');
+    let selectedArtworkTitle = '';
 
     function openContactDialog(title = '') {
-      // Preserve any unsent message unless switching between general and artwork inquiry.
       contactForm.reset();
+      contactStatus.hidden = true;
+      contactStatus.textContent = '';
+      if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') window.hcaptcha.reset();
+      contactDialog.showModal();
+      // Populate after reset and modal opening so the values remain visible.
       contactArtwork.value = title;
       contactSubject.value = title
         ? `Art From The Heart - Inquiry about ${title}`
@@ -915,19 +920,14 @@
       contactMessage.value = title
         ? `Hello Tanya, I'm interested in ${title} and would like to ask about availability and purchase options.`
         : '';
-      contactStatus.hidden = true;
-      contactStatus.textContent = '';
-      if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') window.hcaptcha.reset();
-      contactDialog.showModal();
       contactDialog.scrollTop = 0;
       contactName.focus({preventScroll: true});
     }
 
     inquireButton.addEventListener('click', event => {
       event.preventDefault();
-      const title = lightboxTitle.textContent;
+      const title = selectedArtworkTitle || lightboxTitle.textContent.trim();
       lightbox.close();
-      // A new modal is opened after the artwork modal has closed.
       openContactDialog(title);
     });
 
@@ -1026,6 +1026,7 @@
 
     document.querySelectorAll('.art-card').forEach(card => {
       card.addEventListener('click', () => {
+        selectedArtworkTitle = card.dataset.title || '';
         lightboxImage.classList.add('loading');
         lightboxImage.alt = card.dataset.title;
 
