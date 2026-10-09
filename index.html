@@ -517,6 +517,38 @@
     .contact-small { color:var(--muted);font-size:.86rem;line-height:1.65; }
     .contact-small a { color:var(--plum);font-weight:700; }
     @media(max-width:620px) { .contact-fields { grid-template-columns:1fr; } .nav { flex-wrap:wrap;padding:10px 0; } nav ul { flex-wrap:wrap;justify-content:center;gap:2px 6px; } }
+
+    /* Contact form appears only when requested. */
+    dialog.contact-dialog {
+      width: min(94vw, 760px);
+      max-width: 760px;
+      max-height: min(90dvh, 900px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: #fffaf7;
+      color: var(--ink);
+      border-radius: 28px;
+      padding: 0;
+    }
+    .contact-dialog .contact-panel { position: relative; padding: clamp(24px, 4vw, 38px); box-shadow: none; border: 0; border-radius: 28px; }
+    .contact-dialog .contact-panel h2 { padding-right: 42px; }
+    .contact-close {
+      position: absolute; top: 18px; right: 18px;
+      width: 42px; height: 42px; border-radius: 50%;
+      border: 1px solid rgba(118,80,111,.22);
+      background: white; color: var(--plum);
+      font-size: 1.5rem; cursor: pointer;
+    }
+    .contact-close:hover, .contact-close:focus-visible { background: #f5e9ef; }
+    .contact-dialog .contact-field textarea { min-height: 115px; }
+    .contact-dialog .contact-fields { gap: 12px; margin-top: 16px; }
+    .contact-dialog .contact-footer { margin-top: 14px; }
+    .contact-dialog .contact-small { overflow-wrap: anywhere; }
+    @media (max-width: 620px) {
+      dialog.contact-dialog { width: calc(100vw - 20px); max-height: 92dvh; border-radius: 18px; }
+      .contact-dialog .contact-panel { padding: 22px 18px; border-radius: 18px; }
+      .contact-dialog .contact-fields { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -531,7 +563,7 @@
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#how-to-purchase">How to Purchase</a></li>
           <li><a href="#about">About the Artist</a></li>
-          <li><a href="#contact">Contact Tanya</a></li>
+          <li><a href="#contactDialog">Contact Tanya</a></li>
         </ul>
       </nav>
     </div>
@@ -745,32 +777,6 @@
     </section>
 
 
-    <section id="contact" aria-labelledby="contact-heading">
-      <div class="shell">
-        <div class="contact-panel">
-          <div class="eyebrow">Questions &amp; artwork inquiries</div>
-          <h2 id="contact-heading">Contact Tanya</h2>
-          <p class="contact-intro">Interested in a painting, or have a question about Tanya's work? Send a message here—no email program is required.</p>
-          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="2323f8f9-b4f2-47b2-867d-53e7fba1a04a">
-            <input type="hidden" name="subject" id="contactSubject" value="Art From The Heart - General Inquiry">
-            <input type="hidden" name="from_name" value="Art From The Heart">
-            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-            <div class="contact-fields">
-              <div class="contact-field"><label for="contactName">Your name *</label><input id="contactName" name="name" type="text" autocomplete="name" maxlength="120" required></div>
-              <div class="contact-field"><label for="contactEmail">Email address *</label><input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" required></div>
-              <div class="contact-field full"><label for="contactArtwork">Artwork of interest (optional)</label><input id="contactArtwork" name="artwork" type="text" maxlength="160" placeholder="General inquiry or painting title"></div>
-              <div class="contact-field full"><label for="contactMessage">Your message *</label><textarea id="contactMessage" name="message" maxlength="4000" required placeholder="How can Tanya help you?"></textarea></div>
-            </div>
-            <div class="h-captcha" data-captcha="true"></div>
-            <div class="contact-footer"><button type="submit" id="contactSubmit" class="contact-submit">Send Inquiry</button><span class="contact-small">* Required fields</span></div>
-            <p id="contactStatus" class="contact-status" role="status" aria-live="polite" hidden></p>
-          </form>
-          <p class="contact-small">Having trouble with the form? Email <a href="mailto:tanyamoiseev@comcast.net">tanyamoiseev@comcast.net</a> directly. Please do not include payment information. Read our <a href="privacy.html">Privacy Policy</a>.</p>
-        </div>
-      </div>
-    </section>
-
     <section id="about">
       <div class="shell about">
         <div>
@@ -815,10 +821,36 @@
         <a href="terms.html">Terms &amp; Conditions</a>
         <a href="shipping-returns.html">Shipping &amp; Returns</a>
         <a href="privacy.html">Privacy Policy</a>
-        <a href="#contact">Contact Tanya</a>
+        <a href="#contactDialog">Contact Tanya</a>
       </div>
     </div>
   </footer>
+
+  <dialog id="contactDialog" class="contact-dialog" aria-labelledby="contact-heading">
+    <div class="contact-panel">
+      <button type="button" id="closeContact" class="contact-close" aria-label="Close contact form">&times;</button>
+
+          <div class="eyebrow">Questions &amp; artwork inquiries</div>
+          <h2 id="contact-heading">Contact Tanya</h2>
+          <p class="contact-intro">Interested in a painting, or have a question about Tanya's work? Send a message here—no email program is required.</p>
+          <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="2323f8f9-b4f2-47b2-867d-53e7fba1a04a">
+            <input type="hidden" name="subject" id="contactSubject" value="Art From The Heart - General Inquiry">
+            <input type="hidden" name="from_name" value="Art From The Heart">
+            <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+            <div class="contact-fields">
+              <div class="contact-field"><label for="contactName">Your name *</label><input id="contactName" name="name" type="text" autocomplete="name" maxlength="120" required></div>
+              <div class="contact-field"><label for="contactEmail">Email address *</label><input id="contactEmail" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+              <div class="contact-field full"><label for="contactArtwork">Artwork of interest (optional)</label><input id="contactArtwork" name="artwork" type="text" maxlength="160" placeholder="General inquiry or painting title"></div>
+              <div class="contact-field full"><label for="contactMessage">Your message *</label><textarea id="contactMessage" name="message" maxlength="4000" required placeholder="How can Tanya help you?"></textarea></div>
+            </div>
+            <div class="h-captcha" data-captcha="true"></div>
+            <div class="contact-footer"><button type="submit" id="contactSubmit" class="contact-submit">Send Inquiry</button><span class="contact-small">* Required fields</span></div>
+            <p id="contactStatus" class="contact-status" role="status" aria-live="polite" hidden></p>
+          </form>
+          <p class="contact-small">Having trouble with the form? Email <a href="mailto:tanyamoiseev@comcast.net">tanyamoiseev@comcast.net</a> directly. Please do not include payment information. Read our <a href="privacy.html">Privacy Policy</a>.</p>
+        </div>
+  </dialog>
 
   <dialog id="lightbox" aria-label="Artwork preview">
     <div class="lightbox-wrap">
@@ -836,7 +868,7 @@
         </div>
         <div class="purchase-area">
           <div class="purchase-actions" id="purchaseActions">
-            <a class="purchase-button inquire" id="inquireButton" href="#contact">Inquire to Purchase</a>
+            <a class="purchase-button inquire" id="inquireButton" href="#contactDialog">Inquire to Purchase</a>
           </div>
           <div class="sold-note" id="soldNote" hidden>Sold</div>
           <p class="purchase-note" id="purchaseNote">
@@ -869,28 +901,45 @@
     const contactStatus = document.getElementById('contactStatus');
     const contactSubmit = document.getElementById('contactSubmit');
 
-    function prepareArtworkInquiry(title) {
+    const contactDialog = document.getElementById('contactDialog');
+    const closeContact = document.getElementById('closeContact');
+    const contactName = document.getElementById('contactName');
+
+    function openContactDialog(title = '') {
+      // Preserve any unsent message unless switching between general and artwork inquiry.
+      contactForm.reset();
       contactArtwork.value = title;
-      contactSubject.value = `Art From The Heart - Inquiry about ${title}`;
-      contactMessage.value = `Hello Tanya, I'm interested in ${title} and would like to ask about availability and purchase options.`;
+      contactSubject.value = title
+        ? `Art From The Heart - Inquiry about ${title}`
+        : 'Art From The Heart - General Inquiry';
+      contactMessage.value = title
+        ? `Hello Tanya, I'm interested in ${title} and would like to ask about availability and purchase options.`
+        : '';
       contactStatus.hidden = true;
+      contactStatus.textContent = '';
+      if (window.hcaptcha && typeof window.hcaptcha.reset === 'function') window.hcaptcha.reset();
+      contactDialog.showModal();
+      contactDialog.scrollTop = 0;
+      contactName.focus({preventScroll: true});
     }
 
     inquireButton.addEventListener('click', event => {
       event.preventDefault();
+      const title = lightboxTitle.textContent;
       lightbox.close();
-      window.location.hash = 'contact';
-      document.getElementById('contactName').focus({preventScroll:true});
+      // A new modal is opened after the artwork modal has closed.
+      openContactDialog(title);
     });
 
-    document.querySelectorAll('a[href="#contact"]').forEach(link => {
-      if (link === inquireButton) return;
-      link.addEventListener('click', () => {
-        contactArtwork.value = '';
-        contactSubject.value = 'Art From The Heart - General Inquiry';
-        contactMessage.value = '';
-        contactStatus.hidden = true;
+    document.querySelectorAll('a[href="#contactDialog"]').forEach(link => {
+      link.addEventListener('click', event => {
+        event.preventDefault();
+        openContactDialog();
       });
+    });
+    closeContact.addEventListener('click', () => contactDialog.close());
+    contactDialog.addEventListener('click', event => {
+      if (event.target === contactDialog) contactDialog.close();
     });
 
     contactForm.addEventListener('submit', async event => {
@@ -999,7 +1048,7 @@
         purchaseNote.hidden = isSold;
         soldNote.hidden = !isSold;
 
-        if (!isSold) prepareArtworkInquiry(card.dataset.title);
+        // The selected title is supplied when Inquire to Purchase is clicked.
 
         lightbox.showModal();
       });
